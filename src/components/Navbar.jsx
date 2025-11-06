@@ -13,7 +13,7 @@ function Navbar({ setTab }) {
         </h1>
       </div>
       <div className="button-container">
-        <button onClick={() => setTab("menu")}>Menu</button>
+        <button onClick={() => setTab("home")}>Home</button>
         <button onClick={() => setTab("history")}>History</button>
       </div>
     </div>
