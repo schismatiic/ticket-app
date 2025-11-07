@@ -1,4 +1,5 @@
 import "./styles/event-card.css";
+import { Link } from "react-router-dom";
 function EventCard({ image, location, title, date, price }) {
   return (
     <div className="event-card">

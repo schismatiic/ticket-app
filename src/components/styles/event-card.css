@@ -16,6 +16,7 @@
   cursor: pointer;
 }
 .event-card:hover {
+  background-color: #444444;
   transform: scale(1.03);
 }
 .event-card img {
