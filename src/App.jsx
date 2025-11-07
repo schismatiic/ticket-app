@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import History from "./pages/History";
 // =======================================================================
+import EventCard from "./components/EventCard";
 import "./App.css";
 import healthcheck from "./services/health";
 import eventApi from "./services/events";

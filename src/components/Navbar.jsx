@@ -4,7 +4,7 @@ import "./styles/navbar.css";
 function Navbar() {
   console.log("Navbar loaded");
   return (
-    <div>
+    <div className="navbar-container">
       <div className="logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <title>ticket</title>

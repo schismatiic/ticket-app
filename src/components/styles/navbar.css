@@ -3,15 +3,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #3b3b3b;
   padding: 10px 20px;
   border-radius: 40px;
-  margin: 20px;
+  margin: 0 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -19,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 0 20px;
   padding: 10px 20px;
   font-size: 10px;
 }
