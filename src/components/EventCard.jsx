@@ -1,8 +1,8 @@
 import "./styles/event-card.css";
 import { Link } from "react-router-dom";
-function EventCard({ image, location, title, date, price }) {
+function EventCard({ image, location, title, date, price, onClick}) {
   return (
-    <div className="event-card">
+    <div className="event-card" onClick={onClick}>
       <img src={image} alt={title} />
       <div className="event-card__info">
         <h3>{title}</h3>
