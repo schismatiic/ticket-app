@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import healthcheck from "./services/health";
+import eventApi from "./services/events";
+const eventsApi = eventApi();
 function App() {
   const [tab, setTab] = useState("home");
-
-  console.log("[DEBUG]: Probando Healthcheck");
-  healthcheck();
-
-  console.log("Healthcheck Ejecutado");
-
   return (
     <>
       <Navbar setTab={setTab}></Navbar>
