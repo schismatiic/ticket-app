@@ -2,7 +2,7 @@ const api = import.meta.env.VITE_API_URL;
 
 async function postReservation(newReservation) {
   try {
-    const response = await fetch(api + "/Reservations", {
+    const response = await fetch(api + "/reservations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newReservation),
@@ -24,7 +24,7 @@ async function postReservation(newReservation) {
 
 async function getReservation(id) {
   try {
-    const response = await fetch(api + `/Reservations/${id}`);
+    const response = await fetch(api + `/reservations/${id}`);
     if (!response.ok) {
       throw new Error(
         `Error en get de reservation. Status: ${response.status}`,
@@ -42,7 +42,7 @@ async function getReservation(id) {
 
 async function deleteReservation(id) {
   try {
-    const response = await fetch(api + `/Reservations/${id}`, {
+    const response = await fetch(api + `/reservations/${id}`, {
       method: "DELETE",
     });
     if (!response.ok) {

@@ -2,7 +2,7 @@ const api = import.meta.env.VITE_API_URL;
 
 async function checkout(purchase) {
   try {
-    const response = await fetch(api + "/Purchases", {
+    const response = await fetch(api + "/purchases", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(purchase),
@@ -22,7 +22,7 @@ async function checkout(purchase) {
 
 async function compra(id) {
   try {
-    const response = await fetch(api + `/Purchases/${id}`);
+    const response = await fetch(api + `/purchases/${id}`);
     if (!response.ok) {
       throw new Error(`Error en get de purchase. Status: ${response.status}`);
     }
