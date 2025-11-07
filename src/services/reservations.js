@@ -9,7 +9,7 @@ async function postReservation(newReservation) {
     });
     if (!response.ok) {
       throw new Error(
-        "Error en post de reservacion. Status: ${response.status}",
+        `Error en post de reservation. Status: ${response.status}`,
       );
     }
     const result = await response.json();
@@ -27,7 +27,7 @@ async function getReservation(id) {
     const response = await fetch(api + `/Reservations/${id}`);
     if (!response.ok) {
       throw new Error(
-        `Error en get de reservacion. Status: ${response.status}`,
+        `Error en get de reservation. Status: ${response.status}`,
       );
     }
     const result = await response.json();
@@ -47,7 +47,7 @@ async function deleteReservation(id) {
     });
     if (!response.ok) {
       throw new Error(
-        `Error en delete de reservacion . Status: ${response.status}`,
+        `Error en delete de reservation . Status: ${response.status}`,
       );
     }
     const result = await response.json();
@@ -59,3 +59,13 @@ async function deleteReservation(id) {
     return err;
   }
 }
+
+function reservationAPI() {
+  return {
+    getByID: (id) => getReservation(id),
+    post: (id) => postReservation(id),
+    borrar: (id) => deleteReservation(id),
+  };
+}
+
+export default reservationAPI;
