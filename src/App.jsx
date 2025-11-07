@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import History from "./pages/History";
+import EventDetail from "./pages/EventDetail"
 // =======================================================================
 import EventCard from "./components/EventCard";
 import "./App.css";
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<History />} />
+        <Route path="/event-detail/:id" element={<EventDetail />} />
       </Routes>
     </BrowserRouter>
   );
