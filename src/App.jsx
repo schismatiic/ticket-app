@@ -1,15 +1,23 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+// ============= Lo siguiente solo se utiliza para el Navbar =============
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import History from "./pages/History";
+// =======================================================================
+import "./App.css";
 import healthcheck from "./services/health";
 import eventApi from "./services/events";
 const eventsApi = eventApi();
 function App() {
-  const [tab, setTab] = useState("home");
   return (
-    <>
-      <Navbar setTab={setTab}></Navbar>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/history" element={<History />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
