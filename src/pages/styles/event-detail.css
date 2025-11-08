@@ -1,0 +1,36 @@
+.event-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  background-color: #3b3b3b;
+  border-radius: 20px;
+  padding: 30px;
+}
+.event-detail-container h1 {
+  color: rgba(226, 23, 23, 0.952);
+}
+.event-detail-container img {
+  margin-bottom: 20px;
+  background-color: #2e2e2e;
+  padding: 8px;
+  width: 1000px;
+}
+.event-detail-info {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.event-detail-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-detail-row svg {
+  width: 24px;
+  margin-right: 4px;
+  fill: rgba(226, 23, 23, 0.952);
+}
