@@ -3,11 +3,11 @@ import reservationAPI from "../services/reservations";
 
 const api = reservationAPI();
 
-function useReservation(id) {
+export default function useReservation(id) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(id);
+  //console.log(id);
   useEffect(() => {
     if (!id) {
       console.log("[DEBUG nuro] no hay una id proporcionada");
@@ -30,9 +30,7 @@ function useReservation(id) {
     };
 
     response(); //la llamamos
-  }, []);
+  }, []); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
 
   return { id, data, loading, error };
 } //get
-
-export default useReservation;
