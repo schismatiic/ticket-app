@@ -1,16 +1,19 @@
+import lpr from "../assets/lpr.jpg";
 export const eventos = [
   {
     id: 1,
     image: "https://i.redd.it/3ccvjqsymii91.png",
     location: "Estadio Spotify Chinquihue",
     title: "Radiohead 1",
-    description: "Concierto de la era Kid A — apertura con Everything In Its Right Place",
+    description:
+      "Concierto de la era Kid A — apertura con Everything In Its Right Place",
     date: "05 de Diciembre - 07 de Diciembre",
     price: "80.000",
   },
   {
     id: 2,
-    image: "https://i.redd.it/3ccvjqsymii91.png",
+    image:
+      "https://i.redd.it/uncropped-the-ok-computer-album-cover-wallpaper-crops-v0-d5a6i9q4roj91.png?width=3840&format=png&auto=webp&s=a188fe702c41a0dd9766ffa12745110355a4e903",
     location: "Estadio Nacional - Ñuñoa",
     title: "Radiohead 2",
     description: "Setlist centrado en OK Computer y The Bends",
@@ -19,12 +22,12 @@ export const eventos = [
   },
   {
     id: 3,
-    image: "https://i.redd.it/3ccvjqsymii91.png",
+    image: lpr,
     location: "Estadio Nacional - Ñuñoa",
-    title: "Radiohead 3",
+    title: "Los Pixula Rika DEBUT .l.",
     description: "Presentación acústica con invitados especiales",
     date: "05 de Diciembre - 07 de Diciembre",
-    price: "80.000",
+    price: "1.000",
   },
   {
     id: 4,
@@ -37,7 +40,7 @@ export const eventos = [
   },
   {
     id: 5,
-    image: "https://i.redd.it/3ccvjqsymii91.png",
+    image: "https://i.redd.it/4yiwgcddr8hb1.jpg",
     location: "Estadio Nacional - Ñuñoa",
     title: "Radiohead 5",
     description: "Revisión completa de In Rainbows en vivo",
