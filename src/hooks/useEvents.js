@@ -28,6 +28,7 @@ export function useGetbyId() {
     } catch (err) {
       console.log("[DEBUG]: Error en useGetbyId()");
       setError(err);
+      throw err;
     } finally {
       setLoading(false);
     }
@@ -35,7 +36,6 @@ export function useGetbyId() {
   //
   return { get, data, isLoading, error };
 }
-
 export function useDelete() {
   console.log("[DEBUG]: Ejecutando useDelete");
   const [data, setData] = useState(null);
@@ -52,11 +52,67 @@ export function useDelete() {
     } catch (err) {
       console.log("[DEBUG]: Error en useDelete");
       setError(err);
+      throw err;
     } finally {
       setLoading(false);
     }
   }
   return { borrar, data, isLoading, error };
+}
+
+export function usePost() {
+  console.log("[DEBUG]: Ejecutando usePost");
+
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  async function post(evento) {
+    if (!evento) return;
+
+    setLoading(true);
+    try {
+      const dato = await api.post(evento);
+      setData(dato);
+      return data;
+    } catch (err) {
+      console.log("[DEBUG]: Error en usePost");
+      setError(err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+  return { post, data, isLoading, error };
+}
+
+export function usePatch() {
+  console.log("[DEBUG]: Ejecutando usePatch");
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  async function patch(id, parche) {
+    console.log("[DEBUG]: Iniciando patch");
+    if (!id || !parche) {
+      console.log("[DEBUG]: No se incluyo id o parche");
+      return;
+    }
+    setLoading(true);
+    try {
+      console.log("Intentamos llamar patch");
+      const dato = await api.patch(id, parche);
+      setData(dato);
+      console.log("Parch llamado");
+      return data;
+    } catch (err) {
+      console.log("[DEBUG]: Error en usePartch");
+      setError(err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+  return { patch, data, isLoading, error };
 }
 export function useGetEvents() {
   console.log("[DEBU]: Ejecutando useGetEvents");
@@ -67,7 +123,11 @@ export function useGetEvents() {
   async function getEvents(params) {
     console.log("[DEBUG]: Iniciando getEvents");
     setLoading(true);
-
+    // IMPORTANTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // ESTA FUNCION NO DEBE VERIFICAR SI SE RECIBEN PARAMETROS
+    // PORQUE SI NO RECIBE PARAMETROS RETONRA LA LISTA ENTERA
+    // JUSTO COMO CORRESPONDE
+    // NO INCLUYAN ESA WEA !!!!!!!!!!
     //
     try {
       const dato = await api.getEvents(params);
@@ -75,6 +135,7 @@ export function useGetEvents() {
     } catch (err) {
       console.log("[DEBUG]: Error en useGetEvents, de useEvents.js");
       setError(err);
+      throw err;
     } finally {
       setLoading(false);
     }
@@ -83,3 +144,5 @@ export function useGetEvents() {
   //
   return { getEvents, data, isLoading, error };
 }
+
+//
