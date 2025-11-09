@@ -3,7 +3,7 @@ import reservationAPI from "../services/reservations";
 
 const api = reservationAPI();
 
-export default function useReservation(id) {
+export function useReservation(id) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,3 +34,30 @@ export default function useReservation(id) {
 
   return { id, data, loading, error };
 } //get
+
+export function useDeleteReservation(id) {
+  const [deleted, setDeleted] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    const response = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const result = api.borrar(id);
+        setDeleted(result);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    response();
+  }, []);
+  return { id, deleted, loading, error };
+}
