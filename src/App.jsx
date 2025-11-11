@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import History from "./pages/History";
+import Reservations from "./pages/Reservations";
 import EventDetail from "./pages/EventDetail";
 // =======================================================================
 import EventCard from "./components/EventCard";
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/reservations" element={<Reservations />} />
         <Route path="/history" element={<History />} />
         <Route path="/event-detail/:id" element={<EventDetail />} />
       </Routes>

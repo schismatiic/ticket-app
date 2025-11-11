@@ -78,15 +78,15 @@ export function usePostReservation(reservation) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) {
-      return;
-    }
     const response = async () => {
+      if (!reservation) return;
+
       setLoading(true);
       setError(null);
 
       try {
-        const post = api.post(reservation);
+        const post = await api.post(reservation);
+        console.log(post);
         setData(post);
       } catch (err) {
         setError(err);
@@ -97,6 +97,6 @@ export function usePostReservation(reservation) {
     };
 
     response();
-  }, []);
-  return { id, reservation, loading, error };
+  }, [reservation]);
+  return { id, data, loading, error };
 }

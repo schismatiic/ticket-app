@@ -17,6 +17,7 @@ function Navbar() {
       <div className="navbar">
         <div className="button-container">
           <Link to="/">Home</Link>
+          <Link to="/reservations">Reservations</Link>
           <Link to="/history">History</Link>
         </div>
       </div>
