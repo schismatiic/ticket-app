@@ -25,6 +25,7 @@ export function useGetbyId() {
       // Aca llamamos la capa de servicios, todo el resto es mero tratado de funciones asincronas
       const dato = await api.getbyId(id);
       setData(dato);
+      return data;
     } catch (err) {
       console.log("[DEBUG]: Error en useGetbyId()");
       setError(err);
@@ -49,6 +50,7 @@ export function useDelete() {
     try {
       const dato = await api.borra(id);
       setData(dato);
+      return data;
     } catch (err) {
       console.log("[DEBUG]: Error en useDelete");
       setError(err);
@@ -132,6 +134,7 @@ export function useGetEvents() {
     try {
       const dato = await api.getEvents(params);
       setData(dato);
+      return data;
     } catch (err) {
       console.log("[DEBUG]: Error en useGetEvents, de useEvents.js");
       setError(err);
