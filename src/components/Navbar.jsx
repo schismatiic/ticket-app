@@ -18,7 +18,6 @@ function Navbar() {
         <div className="button-container">
           <Link to="/">Home</Link>
           <Link to="/reservations">Reservations</Link>
-          <Link to="/history">History</Link>
           <Link to="/cart">Cart</Link>
         </div>
       </div>
