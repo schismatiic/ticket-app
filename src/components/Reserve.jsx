@@ -59,8 +59,8 @@ export default function Reserve({ id }) {
   if (!data) return <p>No se encontraron datos del evento.</p>;
 
   return (
-    <div>
-      <h1>Reserva {data.name}</h1>
+    <div className="reserva-container">
+      <h1>{data.name}</h1>
       {data.tickets.map((ticket, i) => (
         <div key={i}>
           <p>
