@@ -7,6 +7,7 @@ import History from "./pages/History";
 import EventDetail from "./pages/EventDetail";
 // =======================================================================
 import EventCard from "./components/EventCard";
+import Footer from "./components/Footer";
 import "./App.css";
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/event-detail/:id" element={<EventDetail />} />
       </Routes>
+      <Footer></Footer>
     </BrowserRouter>
   );
 }
