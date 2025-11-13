@@ -29,7 +29,7 @@ function Home() {
 
   useEffect(() => {
     // al montar el componente, se llama a getEvents sin parámetros
-    getEvents();
+    getEvents({ limit: 100 });
   }, []);
 
   if (isLoading)
