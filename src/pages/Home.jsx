@@ -23,7 +23,7 @@ function Home() {
 
   const eventosFiltrados = useMemo(() => {
     return eventos.filter((e) =>
-      e.name.toLowerCase().includes(busqueda.toLowerCase())
+      e.name.toLowerCase().includes(busqueda.toLowerCase()),
     );
   }, [eventos, busqueda]);
 

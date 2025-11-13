@@ -91,3 +91,9 @@
     width: 12px;
   }
 }
+.event-card-stock {
+  font-weight: 700;
+}
+.event-card-stock span {
+  font-weight: 400;
+}

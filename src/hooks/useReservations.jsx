@@ -21,7 +21,6 @@ export function useReservation(id) {
       try {
         const reservacion = await api.getByID(id);
         setData(reservacion);
-        console.log("[DEBUG data] " + data);
       } catch (err) {
         setError(err);
       } finally {
@@ -30,7 +29,7 @@ export function useReservation(id) {
     };
 
     response(); //la llamamos
-  }, []); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
+  }, [id]); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
 
   return { id, data, loading, error };
 } //get
@@ -58,7 +57,7 @@ export function useDeleteReservation(id) {
       }
     };
     response();
-  }, []);
+  }, [id]);
   return { id, deleted, loading, error };
 }
 // Reservation body
@@ -78,25 +77,25 @@ export function usePostReservation(reservation) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) {
-      return;
-    }
     const response = async () => {
+      if (!reservation) return;
+
       setLoading(true);
       setError(null);
 
       try {
-        const post = api.post(reservation);
+        const post = await api.post(reservation);
+        console.log(post);
         setData(post);
+        setId(post.reservation_id); //retorno el id de la reservacion recien creada
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
-        setId(data.reservation_id); //retorno el id de la reservacion recien creada
       }
     };
 
     response();
-  }, []);
-  return { id, reservation, loading, error };
+  }, [reservation, data]);
+  return { id, data, loading, error };
 }
