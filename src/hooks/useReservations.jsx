@@ -3,99 +3,118 @@ import reservationAPI from "../services/reservations";
 
 const api = reservationAPI();
 
+// 🔹 GET RESERVATION BY ID
 export function useReservation(id) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  //console.log(id);
+
   useEffect(() => {
     if (!id) {
       console.log("[DEBUG nuro] no hay una id proporcionada");
-      return; //no yamamos a la api poque no hay id
+      return;
     }
-    const response = async () => {
+
+    const fetchReservation = async () => {
       setLoading(true);
       setError(null);
 
-      console.log("[DEBUG nuro] intentando...");
+      console.log("[DEBUG nuro] intentando obtener reservación...");
       try {
         const reservacion = await api.getByID(id);
+        console.log("[DEBUG nuro] reservación obtenida:", reservacion);
         setData(reservacion);
       } catch (err) {
+        console.log("[DEBUG nuro] error en getReservation()");
+        console.error(err);
         setError(err);
       } finally {
         setLoading(false);
       }
     };
 
-    response(); //la llamamos
-  }, [id]); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
+    fetchReservation();
+  }, [id]);
 
   return { id, data, loading, error };
-} //get
+}
 
+// 🔹 DELETE RESERVATION
 export function useDeleteReservation(id) {
   const [deleted, setDeleted] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) {
-      return;
-    }
-    const response = async () => {
+    if (!id) return;
+
+    const deleteReservation = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const result = api.borrar(id);
+        console.log("[DEBUG nuro] eliminando reserva con id:", id);
+        const result = await api.borrar(id);
+        console.log("[DEBUG nuro] reserva eliminada:", result);
         setDeleted(result);
       } catch (err) {
+        console.log("[DEBUG nuro] error en deleteReservation()");
+        console.error(err);
         setError(err);
       } finally {
         setLoading(false);
       }
     };
-    response();
+
+    deleteReservation();
   }, [id]);
+
   return { id, deleted, loading, error };
 }
-// Reservation body
+
+// 🔹 POST (CREAR NUEVA RESERVA)
+// Reservation body esperado:
 // {
 //   "event_id": "68f7b9d771fbcc686dd144e8",
 //   "items": [
-//     {
-//       "quantity": 2,
-//       "type": "General"
-//     }
+//     { "quantity": 2, "type": "General" }
 //   ]
 // }
-export function usePostReservation(reservation) {
+
+export function usePostReservation() {
   const [id, setId] = useState("");
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const response = async () => {
-      if (!reservation) return;
+  // ✅ función manual para enviar la reserva
+  const postReservation = async (reservation) => {
+    if (!reservation) {
+      console.warn(
+        "[DEBUG nuro] No se proporcionó ninguna reserva para enviar."
+      );
+      return;
+    }
 
-      setLoading(true);
-      setError(null);
+    setLoading(true);
+    setError(null);
 
-      try {
-        const post = await api.post(reservation);
-        console.log(post);
-        setData(post);
-        setId(post.reservation_id); //retorno el id de la reservacion recien creada
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      console.log("[DEBUG nuro] intentando postear reserva:", reservation);
+      const post = await api.post(reservation);
+      console.log("[DEBUG nuro] respuesta del post:", post);
+      setData(post);
+      setId(post.reservation_id || "");
+      return post;
+    } catch (err) {
+      console.log("[DEBUG nuro] error en postReservation()");
+      console.error(err);
+      setError(err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    response();
-  }, [reservation, data]);
-  return { id, data, loading, error };
+  return { postReservation, id, data, loading, error };
 }

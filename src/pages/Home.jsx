@@ -2,9 +2,8 @@ import EventCard from "../components/EventCard";
 import "./styles/home.css";
 //import { eventos } from "../services/eventosArreglo";
 import { useNavigate } from "react-router-dom";
-import lpr from "../assets/lpr.jpg";
-import ltg from "../assets/ltg.jpg";
 import tds from "../assets/tds.jpg";
+import uno from "../assets/uno.jpg";
 import { useEffect, useState, useMemo } from "react";
 import { useGetEvents } from "../hooks/useEvents";
 
@@ -13,7 +12,7 @@ import HeroCarousel from "../components/HeroCarousel";
 
 import SearchBar from "../components/SearchBar.jsx";
 
-const images = [tds, lpr, ltg];
+const images = [tds, uno];
 function Home() {
   const { getEvents, data, isLoading, error } = useGetEvents();
   const [busqueda, setBusqueda] = useState("");
@@ -23,7 +22,7 @@ function Home() {
 
   const eventosFiltrados = useMemo(() => {
     return eventos.filter((e) =>
-      e.name.toLowerCase().includes(busqueda.toLowerCase()),
+      e.name.toLowerCase().includes(busqueda.toLowerCase())
     );
   }, [eventos, busqueda]);
 

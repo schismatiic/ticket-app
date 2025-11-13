@@ -1,0 +1,21 @@
+.reservas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button-reservar {
+  border-radius: 25px;
+  margin-left: 10px;
+}
+.input-principal {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}

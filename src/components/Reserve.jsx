@@ -1,63 +1,102 @@
 import { useEffect, useState } from "react";
 import { useGetbyId } from "../hooks/useEvents";
 import { usePostReservation } from "../hooks/useReservations";
-
+import "./styles/reserve.css";
 export default function Reserve({ id }) {
   const { get, data, isLoading, error } = useGetbyId();
-  const [counters, setCounters] = useState({}); // contador por ticket
-  const [reservation, setReservation] = useState(null);
+  const {
+    postReservation,
+    loading: postLoading,
+    error: postError,
+  } = usePostReservation();
+  const [counters, setCounters] = useState({});
 
+  // 🔹 Cargar evento por ID
   useEffect(() => {
-    if (id) {
-      get(id);
-    }
+    if (id) get(id);
   }, [id]);
 
+  // 🔹 Inicializar contadores una vez cargados los tickets
   useEffect(() => {
     if (data?.tickets) {
-      // inicializar contadores a 0 para cada ticket
       const initialCounters = {};
-      data.tickets.forEach((t, index) => {
-        initialCounters[index] = 0;
-      });
+      data.tickets.forEach((_, i) => (initialCounters[i] = 0));
       setCounters(initialCounters);
     }
   }, [data]);
 
-  const increment = (index) => {
-    setCounters((prev) => ({
-      ...prev,
-      [index]: Math.min(prev[index] + 1, data.tickets[index].available), // no superar disponible
-    }));
+  const handleReserve = async () => {
+    const selected = data.tickets
+      .map((t, i) => ({
+        type: t.type,
+        quantity: counters[i],
+      }))
+      .filter((t) => t.quantity > 0);
+
+    if (selected.length === 0) {
+      alert("Selecciona al menos un ticket antes de reservar.");
+      return;
+    }
+
+    const newReservation = {
+      event_id: data._id,
+      items: selected,
+    };
+
+    console.log("[DEBUG]: Reserva a enviar:", newReservation);
+
+    try {
+      const result = await postReservation(newReservation);
+      console.log("[DEBUG]: Resultado del POST:", result);
+      alert("Reserva creada correctamente");
+    } catch (err) {
+      alert("Error al crear la reserva");
+    }
   };
 
-  const decrement = (index) => {
-    setCounters((prev) => ({
-      ...prev,
-      [index]: Math.max(prev[index] - 1, 0), // no bajar de 0
-    }));
-  };
-
-  if (isLoading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!data) return <p>No hay datos para este evento</p>;
+  if (isLoading) return <p>Cargando evento...</p>;
+  if (error) return <p>Error al cargar evento: {error.message}</p>;
+  if (!data) return <p>No se encontraron datos del evento.</p>;
 
   return (
     <div>
       <h1>Reserva {data.name}</h1>
-      <h2>Tickets disponibles:</h2>
-      <div>
-        {data.tickets.map((ticket, index) => (
-          <div key={index} style={{ marginBottom: "1rem" }}>
-            <p>
-              {ticket.type} - ${ticket.price} ({ticket.available} disponibles)
-            </p>
-            <button onClick={() => decrement(index)}>-</button>
-            <span style={{ margin: "0 1rem" }}>{counters[index]}</span>
-            <button onClick={() => increment(index)}>+</button>
-          </div>
-        ))}
-      </div>
+      {data.tickets.map((ticket, i) => (
+        <div key={i}>
+          <p>
+            {ticket.type} - ${ticket.price} ({ticket.available} disponibles)
+          </p>
+          <button
+            onClick={() =>
+              setCounters((prev) => ({
+                ...prev,
+                [i]: Math.max(prev[i] - 1, 0),
+              }))
+            }
+          >
+            -
+          </button>
+          <span style={{ margin: "0 10px" }}>{counters[i]}</span>
+          <button
+            onClick={() =>
+              setCounters((prev) => ({
+                ...prev,
+                [i]: Math.min(prev[i] + 1, ticket.available),
+              }))
+            }
+          >
+            +
+          </button>
+        </div>
+      ))}
+      <button
+        className="button-reserva"
+        onClick={handleReserve}
+        disabled={postLoading}
+      >
+        {postLoading ? "Enviando..." : "Confirmar reserva"}
+      </button>
+      {postError && <p style={{ color: "red" }}>Error: {postError.message}</p>}
     </div>
   );
 }

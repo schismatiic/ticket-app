@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useReservation, useDeleteReservation } from "../hooks/useReservations";
-
+import "./styles/reservations-getdel.css";
 //componente en pagina de reservaciones para ver y cancelar reservaciones con un botoncito
 export default function ReservationsGetDel() {
   const [input, setInput] = useState("");
@@ -19,17 +19,19 @@ export default function ReservationsGetDel() {
 
   // Leo dios del css arregla esta wea toda fea
   return (
-    <div className="Reservas">
-      <input
-        className="input"
-        placeholder="ID de reserva"
-        value={input}
-        type="text"
-        onChange={(e) => setInput(e.target.value)}
-      ></input>
-      <button className="button" onClick={handleGet}>
-        Revisar
-      </button>
+    <div className="reservas">
+      <div className="input-container">
+        <input
+          className="input-principal"
+          placeholder="ID de reserva"
+          value={input}
+          type="text"
+          onChange={(e) => setInput(e.target.value)}
+        ></input>
+        <button className="button-reservar" onClick={handleGet}>
+          Revisar
+        </button>
+      </div>
       {!data && id === "" && <p>Ingrese un ID de reservacion</p>}
       {loading && id !== "" && <p>Cargando...</p>}
       {error && <p>Error al cargar reserva</p>}
