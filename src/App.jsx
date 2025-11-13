@@ -13,9 +13,25 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
+  const [lightMode, setLightMode] = useState(false);
+
+  // Aplica o quita el modo claro en el body
+  useEffect(() => {
+    if (lightMode) {
+      document.body.classList.add("light-mode");
+    } else {
+      document.body.classList.remove("light-mode");
+    }
+  }, [lightMode]);
   return (
     <BrowserRouter>
       <Navbar />
+      <button
+        onClick={() => setLightMode(!lightMode)}
+        className="theme-toggle-btn"
+      >
+        {lightMode ? "🌙" : "☀️"}
+      </button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/reservations" element={<Reservations />} />
