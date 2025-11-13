@@ -4,6 +4,7 @@ import "./styles/home.css";
 import { useNavigate } from "react-router-dom";
 import lpr from "../assets/lpr.jpg";
 import ltg from "../assets/ltg.jpg";
+import tds from "../assets/tds.jpg";
 import { useEffect, useState, useMemo } from "react";
 import { useGetEvents } from "../hooks/useEvents";
 
@@ -12,7 +13,7 @@ import HeroCarousel from "../components/HeroCarousel";
 
 import SearchBar from "../components/SearchBar.jsx";
 
-const images = [lpr, ltg];
+const images = [tds, lpr, ltg];
 function Home() {
   const { getEvents, data, isLoading, error } = useGetEvents();
   const [busqueda, setBusqueda] = useState("");
@@ -21,7 +22,7 @@ function Home() {
   const eventos = data?.data || [];
 
   const eventosFiltrados = useMemo(() => {
-    return eventos.filter(e =>
+    return eventos.filter((e) =>
       e.name.toLowerCase().includes(busqueda.toLowerCase())
     );
   }, [eventos, busqueda]);
@@ -84,7 +85,6 @@ function Home() {
           ))}
         </div>
       )}
-      
     </div>
   );
 }
