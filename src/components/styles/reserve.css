@@ -1,3 +1,7 @@
 .button-reserva {
   margin-top: 10px;
+  border-radius: 20px;
+}
+.button-minusplus {
+  border-radius: 50%;
 }

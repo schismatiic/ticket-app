@@ -33,7 +33,9 @@
 .light-mode .navbar,
 .light-mode .input-searchbar,
 .light-mode .input-principal,
-.light-mode .button-reservar {
+.light-mode .button-reservar,
+.light-mode .button-reserva,
+.light-mode .button-minusplus {
   background-color: #e6e6e6 !important;
   color: #111 !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);

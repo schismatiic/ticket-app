@@ -67,6 +67,7 @@ export default function Reserve({ id }) {
             {ticket.type} - ${ticket.price} ({ticket.available} disponibles)
           </p>
           <button
+            className="button-minusplus"
             onClick={() =>
               setCounters((prev) => ({
                 ...prev,
@@ -78,6 +79,7 @@ export default function Reserve({ id }) {
           </button>
           <span style={{ margin: "0 10px" }}>{counters[i]}</span>
           <button
+            className="button-minusplus"
             onClick={() =>
               setCounters((prev) => ({
                 ...prev,
