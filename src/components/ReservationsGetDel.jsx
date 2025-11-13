@@ -15,6 +15,7 @@ export default function ReservationsGetDel() {
     setDel(id);
   };
   const { getId, data, loading, error } = useReservation(id);
+  const { delId, delData, delLoading, delError } = useDeleteReservation(del);
 
   // Leo dios del css arregla esta wea toda fea
   return (
@@ -43,6 +44,9 @@ export default function ReservationsGetDel() {
           </button>
         </div>
       )}
+      {del !== "" && delLoading && <p>Cancelando...</p>}
+      {delError && <p>Error al cancelar reserva, intente de nuevo.</p>}
+      {delData && <p>Reserva {delId} cancelada.</p>}
     </div>
   );
 }
