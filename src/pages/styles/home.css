@@ -19,3 +19,10 @@
   height: 80px;
   margin-top: 10px;
 }
+.home-container {
+  display: flex;
+  flex-direction: column; /* coloca hero y eventos en columna */
+  align-items: center; /* centra horizontalmente los contenidos */
+  gap: 40px; /* espacio entre hero y eventos */
+  padding: 20px 0;
+}
