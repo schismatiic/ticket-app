@@ -34,3 +34,9 @@
   margin-right: 4px;
   width: 15px;
 }
+.event-card-stock {
+  font-weight: 700;
+}
+.event-card-stock span {
+  font-weight: 400;
+}
