@@ -1,16 +1,26 @@
 import { useParams, useLocation } from "react-router-dom";
 import "./styles/event-detail.css";
+import { useGetbyId } from "../hooks/useEvents";
+import { useEffect } from "react";
 
 function EventDetail() {
+  const { get, data: evento, isLoading, error } = useGetbyId();
   const { id } = useParams();
-  const { state } = useLocation(); //Esta cosa es temporal, después hay que hacer llamada a API pq si el ususario recarga la pagina se pierde el evento.
-  const evento = state?.evento;
-  if (!evento) return <p>No se encontró el evento.</p>;
+
+  useEffect(() => {
+    // Llamamos la función para obtener el evento específico
+    get(id);
+  }, [id]);
+
+  if (isLoading) return <p>Cargando evento...</p>;
+  if (error) return <p>Error al cargar evento 😢</p>;
+  if (!evento) return <p>No hay datos aún.</p>;
+
   return (
     <div className="event-detail-container">
-      <img src={evento.image} alt={evento.title} />
+      <img src={evento.image} alt={evento.name} />
       <div className="event-detail-info">
-        <h1>{evento.title}</h1>
+        <h1>{evento.name}</h1>
         <div className="event-detail-row">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>map-marker</title>
@@ -23,7 +33,7 @@ function EventDetail() {
             <title>text-box-multiple-outline</title>
             <path d="M16,15H9V13H16V15M19,11H9V9H19V11M19,7H9V5H19V7M3,5V21H19V23H3A2,2 0 0,1 1,21V5H3M21,1A2,2 0 0,1 23,3V17C23,18.11 22.11,19 21,19H7A2,2 0 0,1 5,17V3C5,1.89 5.89,1 7,1H21M7,3V17H21V3H7Z" />
           </svg>
-          <p>{evento.description}</p>
+          <p>{evento.category}</p>
         </div>
         <div className="event-detail-row">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -32,13 +42,15 @@ function EventDetail() {
           </svg>
           <h2>{evento.date}</h2>
         </div>
-        <div className="event-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <title>ticket-confirmation-outline</title>
-            <path d="M22 10V6C22 4.89 21.1 4 20 4H4C2.9 4 2 4.89 2 6V10C3.11 10 4 10.9 4 12S3.11 14 2 14V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V14C20.9 14 20 13.1 20 12S20.9 10 22 10M20 8.54C18.81 9.23 18 10.53 18 12S18.81 14.77 20 15.46V18H4V15.46C5.19 14.77 6 13.47 6 12C6 10.5 5.2 9.23 4 8.54L4 6H20V8.54M11 15H13V17H11M11 11H13V13H11M11 7H13V9H11Z" />
-          </svg>
-          <h2>${evento.price}</h2>
-        </div>
+        {evento.tickets.map((ticket) => (
+          <div className="event-detail-row">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <title>ticket-confirmation-outline</title>
+              <path d="M22 10V6C22 4.89 21.1 4 20 4H4C2.9 4 2 4.89 2 6V10C3.11 10 4 10.9 4 12S3.11 14 2 14V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V14C20.9 14 20 13.1 20 12S20.9 10 22 10M20 8.54C18.81 9.23 18 10.53 18 12S18.81 14.77 20 15.46V18H4V15.46C5.19 14.77 6 13.47 6 12C6 10.5 5.2 9.23 4 8.54L4 6H20V8.54M11 15H13V17H11M11 11H13V13H11M11 7H13V9H11Z" />
+            </svg>
+            <h2>{ticket.type}: ${ticket.price}</h2>
+          </div>
+        ))}
       </div>
     </div>
   );
