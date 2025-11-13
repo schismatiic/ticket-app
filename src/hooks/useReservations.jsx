@@ -21,7 +21,6 @@ export function useReservation(id) {
       try {
         const reservacion = await api.getByID(id);
         setData(reservacion);
-        console.log("[DEBUG data] " + data);
       } catch (err) {
         setError(err);
       } finally {
@@ -30,7 +29,7 @@ export function useReservation(id) {
     };
 
     response(); //la llamamos
-  }, []); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
+  }, [id]); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
 
   return { id, data, loading, error };
 } //get
@@ -58,7 +57,7 @@ export function useDeleteReservation(id) {
       }
     };
     response();
-  }, []);
+  }, [id]);
   return { id, deleted, loading, error };
 }
 // Reservation body
