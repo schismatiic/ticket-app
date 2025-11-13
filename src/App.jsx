@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import History from "./pages/History";
+import Cart from "./pages/Cart"
 import Reservations from "./pages/Reservations";
 import EventDetail from "./pages/EventDetail";
 import ReserveEvent from "./pages/ReserveEvent";
@@ -38,6 +39,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/event-detail/:id" element={<EventDetail />} />
         <Route path="/event-detail/:id/reserve" element={<ReserveEvent />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
