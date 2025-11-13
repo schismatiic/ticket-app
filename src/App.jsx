@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import History from "./pages/History";
 import Reservations from "./pages/Reservations";
 import EventDetail from "./pages/EventDetail";
+import ReserveEvent from "./pages/ReserveEvent";
 // =======================================================================
 import EventCard from "./components/EventCard";
 import "./App.css";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/reservations" element={<Reservations />} />
         <Route path="/history" element={<History />} />
         <Route path="/event-detail/:id" element={<EventDetail />} />
+        <Route path="/event-detail/:id/reserve" element={<ReserveEvent />} />
       </Routes>
     </BrowserRouter>
   );

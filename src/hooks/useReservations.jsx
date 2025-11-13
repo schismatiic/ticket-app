@@ -87,15 +87,15 @@ export function usePostReservation(reservation) {
         const post = await api.post(reservation);
         console.log(post);
         setData(post);
+        setId(post.reservation_id); //retorno el id de la reservacion recien creada
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
-        setId(data.reservation_id); //retorno el id de la reservacion recien creada
       }
     };
 
     response();
-  }, [reservation]);
+  }, [reservation, data]);
   return { id, data, loading, error };
 }
