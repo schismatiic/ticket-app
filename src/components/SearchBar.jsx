@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import "./styles/navbar.css";
+import "./styles/searchbar.css";
 
-function SearchBar({busqueda, setBusqueda}) {
+function SearchBar({ busqueda, setBusqueda }) {
   return (
-    <div className="navbar-container">
-      <div className="navbar">
-        <div className="button-container">
-          <input type="text" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} placeholder="Escribe aquí..." />
-        </div>
+    <div className="searchbar-container">
+      <div className="searchbar">
+        <input
+          className="input-searchbar"
+          type="text"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          placeholder="Buscar"
+        />
       </div>
     </div>
   );

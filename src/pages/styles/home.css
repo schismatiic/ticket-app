@@ -2,27 +2,26 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .status-message {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 70vh; /* centra verticalmente */
+  height: 70vh;
   font-size: 1.2rem;
   color: #555;
   text-align: center;
 }
 .loading-gif {
-  width: 80px; /* ajusta el tamaño a gusto */
+  width: 80px;
   height: 80px;
   margin-top: 10px;
 }
 .home-container {
   display: flex;
-  flex-direction: column; /* coloca hero y eventos en columna */
-  align-items: center; /* centra horizontalmente los contenidos */
-  gap: 40px; /* espacio entre hero y eventos */
+  flex-direction: column;
+  align-items: center;
   padding: 20px 0;
 }
