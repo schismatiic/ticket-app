@@ -31,7 +31,9 @@
 .light-mode .event-card,
 .light-mode .event-detail-container,
 .light-mode .navbar,
-.light-mode .input-searchbar {
+.light-mode .input-searchbar,
+.light-mode .input-principal,
+.light-mode .button-reservar {
   background-color: #e6e6e6 !important;
   color: #111 !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
