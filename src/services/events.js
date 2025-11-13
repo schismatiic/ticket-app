@@ -1,4 +1,4 @@
-const api = import.meta.env.VITE_API_URL;
+const api = "/api";
 //===================================================
 // Funcion para obtener un evento segun su id
 async function getEventbyId(id) {
