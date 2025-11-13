@@ -21,7 +21,6 @@ export function usePurchase(id) {
       try {
         const purchase = await api.getByID(id);
         setData(purchase);
-        console.log("[DEBUG data] " + data);
       } catch (err) {
         setError(err);
       } finally {
@@ -30,7 +29,7 @@ export function usePurchase(id) {
     };
 
     response(); //la llamamos
-  }, []); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
+  }, [id]); //VIM se queja de las dependencias de data id blablabla pero si las pongo hace while true asi q no las puse funca iwal asi q eso miau
 
   return { id, data, loading, error };
 } //get
@@ -75,6 +74,6 @@ export function useCheckout(purchase) {
     };
 
     response();
-  }, []);
+  }, [purchase, id, data]);
   return { id, purchase, loading, error };
 } // yippie
