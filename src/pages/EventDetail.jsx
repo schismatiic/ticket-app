@@ -7,22 +7,20 @@ import { useGetbyId } from "../hooks/useEvents";
 function EventDetail() {
   const { get, data: evento, isLoading, error } = useGetbyId();
   const { id } = useParams();
-
+  const { setGlobalID } = useGlobal();
   useEffect(() => {
     // Llamamos la función para obtener el evento específico
     get(id);
   }, [id]);
-
+  useEffect(() => {
+    setGlobalID(id);
+  }, [id, setGlobalID]);
   if (isLoading) return <p>Cargando evento...</p>;
   if (error) return <p>Error al cargar evento 😢</p>;
   if (!evento) return <p>No hay datos aún.</p>;
 
   //const { state } = useLocation(); //Esta cosa es temporal, después hay que hacer llamada a API pq si el ususario recarga la pagina se pierde el evento.
-  const { setGlobalID } = useGlobal();
 
-  useEffect(() => {
-    setGlobalID(id);
-  }, [id, setGlobalID]);
   //tengo q hacer un use context y no lo entiendo :(
   if (!evento) return <p>No se encontró el evento.</p>;
   return (
