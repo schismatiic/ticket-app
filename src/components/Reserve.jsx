@@ -61,6 +61,7 @@ export default function Reserve({ id }) {
   return (
     <div className="reserva-container">
       <h1>{data.name}</h1>
+      <img src={data.image} />
       {data.tickets.map((ticket, i) => (
         <div key={i}>
           <p>
